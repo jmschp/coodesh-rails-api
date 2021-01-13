@@ -17,6 +17,10 @@ class ProductPolicy < ApplicationPolicy
     true
   end
 
+  def update?
+    true
+  end
+
   def api_status?
     true
   end

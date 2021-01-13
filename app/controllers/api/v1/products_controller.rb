@@ -1,5 +1,5 @@
 class Api::V1::ProductsController < Api::V1::BaseController
-  before_action :set_restaurant, only: [:show]
+  before_action :set_restaurant, only: [:show, :update]
 
   def index
     @products = policy_scope(Product)
@@ -13,6 +13,14 @@ class Api::V1::ProductsController < Api::V1::BaseController
     authorize @product
     if @product.save
       render :show, status: :created
+    else
+      render_error
+    end
+  end
+
+  def update
+    if Product.update(product_params)
+      render :show
     else
       render_error
     end
@@ -36,7 +44,6 @@ class Api::V1::ProductsController < Api::V1::BaseController
   end
 
   def render_error
-    render json: { errors: @product.errors.full_messages },
-      status: :unprocessable_entity
+    render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
   end
 end
