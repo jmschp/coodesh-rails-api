@@ -1,4 +1,4 @@
-PRODUCT_TYPE = []
+PRODUCT_TYPE = ['dairy', 'fruit', 'vegetable', 'bakery', 'vegan', 'meat']
 PRODUCT_RATING = [1, 2, 3, 4, 5]
 class Product < ApplicationRecord
   validates :title, presence: true, length: { maximum: 250 }
