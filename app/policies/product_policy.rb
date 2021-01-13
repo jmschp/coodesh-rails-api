@@ -13,6 +13,10 @@ class ProductPolicy < ApplicationPolicy
     true
   end
 
+  def create?
+    true
+  end
+
   def api_status?
     true
   end
