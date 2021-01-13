@@ -53,7 +53,7 @@ Escrever a documentação da API utlizando conceito [OpenAPI Specification](http
  
 ## Front-End
  
-![Home](assets/images/home.png)
+![Home](app/assets/images/home.png)
 
 ### Upload de produtos
  
