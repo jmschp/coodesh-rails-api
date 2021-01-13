@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :products, only: [ :index ]
+      resources :products, only: [ :index, :show ]
     end
   end
+
+  get "/api/v1", to: "api/v1/products#api_status", defaults: { format: :json }
+
 end

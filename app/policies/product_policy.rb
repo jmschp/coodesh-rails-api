@@ -8,4 +8,12 @@ class ProductPolicy < ApplicationPolicy
   def index?
     true
   end
+
+  def show?
+    true
+  end
+
+  def api_status?
+    true
+  end
 end
