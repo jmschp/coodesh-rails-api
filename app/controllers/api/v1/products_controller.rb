@@ -1,5 +1,5 @@
 class Api::V1::ProductsController < Api::V1::BaseController
-  before_action :set_restaurant, only: [:show, :update]
+  before_action :set_product, only: [:show, :update, :destroy]
 
   def index
     @products = policy_scope(Product)
@@ -19,11 +19,16 @@ class Api::V1::ProductsController < Api::V1::BaseController
   end
 
   def update
-    if Product.update(product_params)
+    if @product.update(product_params)
       render :show
     else
       render_error
     end
+  end
+
+  def destroy
+    @product.destroy
+    head :no_content
   end
 
   def api_status
@@ -34,7 +39,7 @@ class Api::V1::ProductsController < Api::V1::BaseController
 
   private
 
-  def set_restaurant
+  def set_product
     @product = Product.find(params[:id])
     authorize @product  # For Pundit
   end

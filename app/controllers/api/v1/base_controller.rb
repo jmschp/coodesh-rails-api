@@ -1,7 +1,7 @@
 class Api::V1::BaseController < ActionController::API
   include Pundit
 
-  after_action :verify_authorized, except: [:index, :show, :create, :update, :api_status]
+  after_action :verify_authorized, except: [:index, :show, :create, :update, :destroy, :api_status]
   after_action :verify_policy_scoped, only: [:index]
 
   rescue_from Pundit::NotAuthorizedError,   with: :user_not_authorized
