@@ -14,8 +14,6 @@ class Api::V1::ProductsController < Api::V1::BaseController
       product_count = 0
       product_params['_json'].each do |product_item|
         product_item[:category] = product_item.delete :type
-        # product_item[:category] = params['type']
-        # binding.pry
         @product = Product.new(product_item)
         authorize @product
         if @product.save
