@@ -10,18 +10,22 @@ class Api::V1::ProductsController < Api::V1::BaseController
   end
 
   def create
-    binding.pry
-    if product_params.is_a?(Array)
-      product_params.each do |product_item|
-        product_item[:category] = params['type']
+    if params.key?('_json')
+      product_count = 0
+      product_params['_json'].each do |product_item|
+        product_item[:category] = product_item.delete :type
+        # product_item[:category] = params['type']
+        # binding.pry
         @product = Product.new(product_item)
         authorize @product
         if @product.save
-          render :index
+          product_count += 1
         else
           render_error
+          break
         end
       end
+      render json: { products_uploaded: product_params['_json'].length, products_saved: product_count }
     else
       product_item = product_params
       product_item[:category] = params['type']
@@ -62,8 +66,11 @@ class Api::V1::ProductsController < Api::V1::BaseController
   end
 
   def product_params
-    params.permit(_json: [:title, :type, :description, :price, :rating]) if params.key?('_json')
-    params.require(:product).permit(:title, :type, :description, :price, :rating)
+    if params.key?('_json')
+      params.permit(_json: [:title, :type, :description, :price, :rating])
+    else
+      params.require(:product).permit(:title, :type, :description, :price, :rating)
+    end
   end
 
   def render_error
