@@ -1,4 +1,5 @@
 class Api::V1::ProductsController < Api::V1::BaseController
+  acts_as_token_authentication_handler_for User
   before_action :set_product, only: [:show, :update, :destroy]
 
   def index
@@ -9,12 +10,28 @@ class Api::V1::ProductsController < Api::V1::BaseController
   end
 
   def create
-    @product = Product.new(product_params)
-    authorize @product
-    if @product.save
-      render :show, status: :created
+    binding.pry
+    if product_params.is_a?(Array)
+      product_params.each do |product_item|
+        product_item[:category] = params['type']
+        @product = Product.new(product_item)
+        authorize @product
+        if @product.save
+          render :index
+        else
+          render_error
+        end
+      end
     else
-      render_error
+      product_item = product_params
+      product_item[:category] = params['type']
+      @product = Product.new(product_item)
+      authorize @product
+      if @product.save
+        render :show, status: :created
+      else
+        render_error
+      end
     end
   end
 
@@ -45,7 +62,8 @@ class Api::V1::ProductsController < Api::V1::BaseController
   end
 
   def product_params
-    params.require(:product).permit(:title, :category, :description, :price, :rating)
+    params.permit(_json: [:title, :type, :description, :price, :rating]) if params.key?('_json')
+    params.require(:product).permit(:title, :type, :description, :price, :rating)
   end
 
   def render_error
