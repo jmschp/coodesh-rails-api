@@ -1,11 +1,15 @@
 <div class="container">
-  <div class="home-banner">
+  <div>
     <h1>Home</h1>
     <p> Lorem ipsum dolor sit amet consectetur adipisicing elit.
       Debitis officiis architecto deleniti modi veritatis odit, ea ex laboriosam maiores corporis voluptatum itaque.
       Praesentium, illum itaque voluptatem molestias inventore sit repellat!
     </p>
   </div>
+  <%= form_with url: '/upload_validation', multipart: true do |form |%>
+    <label for="file">File to Upload</label> <%= form.file_field :file %>
+    <%= submit_tag %>
+  <% end %>
   <table class="table">
     <thead>
       <tr>

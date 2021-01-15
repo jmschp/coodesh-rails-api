@@ -9,8 +9,10 @@ Rails.application.routes.draw do
       resources :products, only: [ :index, :show, :create, :update, :destroy]
     end
   end
-
+  
   get "/api/v1", to: "api/v1/products#api_status", defaults: { format: :json }
   
   resources :products, only: [:edit, :update, :destroy]
+  
+  post "upload_validation", to: "products#upload_validation"
 end

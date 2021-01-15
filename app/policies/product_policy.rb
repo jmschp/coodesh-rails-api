@@ -29,6 +29,10 @@ class ProductPolicy < ApplicationPolicy
     true
   end
 
+  # def upload_validation?
+  #   true
+  # end
+
   # def api_status?
   #   false
   # end
