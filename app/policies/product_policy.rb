@@ -25,7 +25,7 @@ class ProductPolicy < ApplicationPolicy
     false
   end
 
-  def api_status?
-    true
-  end
+  # def api_status?
+  #   true
+  # end
 end
