@@ -12,5 +12,5 @@ Rails.application.routes.draw do
 
   get "/api/v1", to: "api/v1/products#api_status", defaults: { format: :json }
   
-  resources :products, only: :destroy
+  resources :products, only: [:edit, :update, :destroy]
 end
