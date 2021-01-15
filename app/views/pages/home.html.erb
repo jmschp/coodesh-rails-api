@@ -1,2 +1,39 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <div class="home-banner">
+    <h1>Home</h1>
+    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Debitis officiis architecto deleniti modi veritatis odit, ea ex laboriosam maiores corporis voluptatum itaque.
+      Praesentium, illum itaque voluptatem molestias inventore sit repellat!
+    </p>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Type</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Price</th>
+        <th scope="col">Created</th>
+        <th scope="col"> Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <th scope="row"><%= product.title  %></th>
+          <td><%= product.category %></td>
+          <td><%= product.rating %></td>
+          <td><%= product.price %></td>
+          <td><%= product.created_at.strftime("%d/%m/%Y") %></td>
+          <td>Edit /
+              <%= link_to(
+                "Delete",
+                product_path(product),
+                method: :delete,
+                data: { confirm: "Are you sure?" }) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
