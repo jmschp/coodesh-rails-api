@@ -4,6 +4,7 @@ class Api::V1::ProductsController < Api::V1::BaseController
 
   def index
     @products = policy_scope(Product)
+    authorize @products
   end
 
   def show
@@ -31,13 +32,14 @@ class Api::V1::ProductsController < Api::V1::BaseController
     status = response.code
     message = "Ruby on Rails Challenge 20200810"
     @api_status = { status: status, message: message }
+    # authorize @api_status
   end
 
   private
 
   def set_product
     @product = Product.find(params[:id])
-    authorize @product  # For Pundit
+    authorize @product
   end
 
   def product_params

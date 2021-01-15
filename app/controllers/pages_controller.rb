@@ -3,5 +3,6 @@ class PagesController < ApplicationController
 
   def home
     @products = policy_scope(Product)
+    authorize @products, :index?
   end
 end

@@ -30,6 +30,6 @@ class ProductPolicy < ApplicationPolicy
   end
 
   # def api_status?
-  #   false
+  #   true
   # end
 end

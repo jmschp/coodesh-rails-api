@@ -1,5 +1,3 @@
-require 'json'
-
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[edit update destroy]
 
