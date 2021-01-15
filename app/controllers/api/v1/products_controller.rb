@@ -13,10 +13,6 @@ class Api::V1::ProductsController < Api::V1::BaseController
     create_products
   end
 
-  # def self.upload_json
-  #   create_products
-  # end
-
   def update
     if @product.update(product_params)
       render :show

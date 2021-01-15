@@ -6,8 +6,9 @@
       Praesentium, illum itaque voluptatem molestias inventore sit repellat!
     </p>
   </div>
-  <%= form_with url: '/upload_validation', multipart: true do |form |%>
-    <label for="file">File to Upload</label> <%= form.file_field :file %>
+  <%= form_with url: '/upload_validation', multipart: true do |form| %>
+    <label for="file">File to Upload</label>
+    <%= form.file_field :file, accept: 'application/json' %>
     <%= submit_tag %>
   <% end %>
   <table class="table">

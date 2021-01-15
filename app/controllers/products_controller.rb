@@ -17,10 +17,24 @@ class ProductsController < ApplicationController
   end
 
   def upload_validation
-    headers = {'Content-type': 'application/json', 'X-User-Email': current_user.email, 'X-User-Token': current_user.reload.authentication_token }
+    # headers = {
+    #   'Content-type': 'application/json',
+    #   'X-User-Email': current_user.email,
+    #   'X-User-Token': current_user.reload.authentication_token
+    # }
+    headers = {
+      content_type: :json,
+      accept: :json,
+      x_user_email: current_user.email,
+      x_user_token: current_user.reload.authentication_token
+    }
     body = file_format_validation
-    raise
-    redirect_to(api_v1_path, headers: headers, body: body)
+    # raise
+    # redirect_to(api_v1_products_path, method: :post, headers: headers, body: body)
+    # RestClient.post("http://localhost:3000#{api_v1_products_path}", myfile: File.new(file_format_validation, 'rb'), headers: headers )
+
+    RestClient.post("http://localhost:3000#{api_v1_products_path}", body.to_json, headers)
+    redirect_to root_path
   end
 
   private
@@ -30,14 +44,13 @@ class ProductsController < ApplicationController
     authorize @product # For Pundit
   end
 
-  # def product_params
-  #   params.require(:product).permit(:title, :category, :price, :rating)
-  # end
+  def product_params
+    params.require(:product).permit(:title, :category, :price, :rating)
+  end
 
   def file_format_validation
     uploaded_file = params[:file]
-    # file_path = Rails.root.join('public', 'uploads', uploaded_file.original_filename)
-    serialized_products = File.read(uploaded_file.tempfile)
+    serialized_products = uploaded_file.tempfile.read
     JSON.parse(serialized_products)
   end
 end
