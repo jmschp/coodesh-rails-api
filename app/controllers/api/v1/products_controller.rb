@@ -47,7 +47,8 @@ class Api::V1::ProductsController < Api::V1::BaseController
 
   def destroy
     @product.destroy
-    head :no_content
+    # head :no_content
+    render json: { message: "1 product destroyed" }
   end
 
   def api_status
