@@ -14,7 +14,9 @@
         <th scope="col">Rating</th>
         <th scope="col">Price</th>
         <th scope="col">Created</th>
-        <th scope="col"> Action</th>
+        <% if user_signed_in? %>
+          <th scope="col"> Action</th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
@@ -25,13 +27,17 @@
           <td><%= product.rating %></td>
           <td><%= product.price %></td>
           <td><%= product.created_at.strftime("%d/%m/%Y") %></td>
-          <td>Edit /
-              <%= link_to(
-                "Delete",
-                product_path(product),
-                method: :delete,
-                data: { confirm: "Are you sure?" }) %>
-          </td>
+          <% if user_signed_in? %>
+            <td>Edit /
+              <% if policy(product).destroy? %>
+                <%= link_to(
+                    "Delete",
+                    product_path(product),
+                    method: :delete,
+                    data: { confirm: "Are you sure?" }) %>
+              <% end %>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

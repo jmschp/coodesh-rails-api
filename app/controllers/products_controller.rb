@@ -10,6 +10,6 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.find(params[:id])
-    # authorize @product  # For Pundit
+    authorize @product  # For Pundit
   end
 end

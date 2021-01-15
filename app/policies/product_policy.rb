@@ -22,10 +22,10 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def destroy?
-    false
+    true
   end
 
   # def api_status?
-  #   true
+  #   false
   # end
 end

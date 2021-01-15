@@ -61,7 +61,7 @@ class Api::V1::ProductsController < Api::V1::BaseController
 
   def set_product
     @product = Product.find(params[:id])
-    # authorize @product  # For Pundit
+    authorize @product  # For Pundit
   end
 
   def product_params
