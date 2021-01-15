@@ -32,6 +32,8 @@ gem 'devise'
 gem 'pundit'
 gem 'simple_token_authentication'
 
+gem 'rest-client'
+
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
