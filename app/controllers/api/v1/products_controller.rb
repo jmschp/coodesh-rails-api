@@ -44,9 +44,9 @@ class Api::V1::ProductsController < Api::V1::BaseController
 
   def product_params
     if params.key?('_json')
-      params.permit(_json: %i[title type description price rating])
+      params.permit(_json: %i[title type description filename height width price rating])
     else
-      params.require(:product).permit(:title, :type, :description, :price, :rating)
+      params.require(:product).permit(:title, :type, :description, :filename, :height, :width, :price, :rating)
     end
   end
 
