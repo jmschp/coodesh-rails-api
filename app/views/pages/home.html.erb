@@ -1,2 +1,55 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <div>
+    <h1>Home</h1>
+    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Debitis officiis architecto deleniti modi veritatis odit, ea ex laboriosam maiores corporis voluptatum itaque.
+      Praesentium, illum itaque voluptatem molestias inventore sit repellat!
+    </p>
+  </div>
+  <%= form_with url: '/upload_validation', multipart: true do |form| %>
+    <label for="file">File to Upload</label>
+    <%= form.file_field :file, accept: 'application/json' %>
+    <%= submit_tag %>
+  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Type</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Price</th>
+        <th scope="col">Created</th>
+        <% if user_signed_in? %>
+          <th scope="col"> Action</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <th scope="row"><%= product.title  %></th>
+          <td><%= product.category %></td>
+          <td><%= product.rating %></td>
+          <td><%= product.price %></td>
+          <td><%= product.created_at.strftime("%d/%m/%Y") %></td>
+          <% if user_signed_in? %>
+            <td>
+              <% if policy(product).edit? %>
+                <%= link_to(
+                    "Edit",
+                    edit_product_path(product)) %>
+              <% end %> / 
+              <% if policy(product).destroy? %>
+                <%= link_to(
+                    "Delete",
+                    product_path(product),
+                    method: :delete,
+                    data: { confirm: "Are you sure?" }) %>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
