@@ -10,20 +10,17 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product.destroy
+    # raise
+    # @product.destroy
+    RestClient.delete("http://localhost:3000#{api_v1_products_path}/#{@product.id}", set_http_headers)
     redirect_to root_path, notice: "Product deleted"
   end
 
   def upload_validation
-    headers = {
-      content_type: :json,
-      accept: :json,
-      x_user_email: current_user.email,
-      x_user_token: current_user.reload.authentication_token
-    }
     body = file_format_validation
     if body.present?
-      request = RestClient.post("http://localhost:3000#{api_v1_products_path}", body.to_json, headers)
+      request = RestClient.post("http://localhost:3000#{api_v1_products_path}", body.to_json, set_http_headers({ content_type: :json, accept: :json }))
+
       json_response = JSON.parse(request.body)
 
       flash[:notice] = "Uploaded: #{json_response['products_uploaded']} | Saved: #{json_response['products_saved']}"
@@ -49,6 +46,18 @@ class ProductsController < ApplicationController
       uploaded_file = params[:file]
       serialized_products = uploaded_file.tempfile.read
       JSON.parse(serialized_products)
+    end
+  end
+
+  def set_http_headers(args = {})
+    headers = {
+      x_user_email: current_user.email,
+      x_user_token: current_user.reload.authentication_token
+    }
+    if args.empty?
+      headers
+    else
+      headers.merge(args)
     end
   end
 end
