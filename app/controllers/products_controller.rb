@@ -15,11 +15,6 @@ class ProductsController < ApplicationController
   end
 
   def upload_validation
-    # headers = {
-    #   'Content-type': 'application/json',
-    #   'X-User-Email': current_user.email,
-    #   'X-User-Token': current_user.reload.authentication_token
-    # }
     headers = {
       content_type: :json,
       accept: :json,
@@ -27,13 +22,9 @@ class ProductsController < ApplicationController
       x_user_token: current_user.reload.authentication_token
     }
     body = file_format_validation
-    # raise
-    # redirect_to(api_v1_products_path, method: :post, headers: headers, body: body)
-    # RestClient.post("http://localhost:3000#{api_v1_products_path}", myfile: File.new(file_format_validation, 'rb'), headers: headers )
-
-    r = RestClient.post("http://localhost:3000#{api_v1_products_path}", body.to_json, headers)
-    raise
-    redirect_to root_path
+    request = RestClient.post("http://localhost:3000#{api_v1_products_path}", body.to_json, headers)
+    json_response = JSON.parse(request.body)
+    redirect_to root_path, notice: "Products uploaded: #{json_response['products_uploaded']} | Products saved: #{json_response['products_saved']}"
   end
 
   private
