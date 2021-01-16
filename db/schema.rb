@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_01_13_214341) do
     t.string "title", null: false
     t.string "category", null: false
     t.text "description"
-    t.decimal "price", precision: 10, default: "0", null: false
+    t.decimal "price", precision: 10, scale: 2, default: "0.0", null: false
     t.integer "rating", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
