@@ -31,7 +31,8 @@ class ProductsController < ApplicationController
     # redirect_to(api_v1_products_path, method: :post, headers: headers, body: body)
     # RestClient.post("http://localhost:3000#{api_v1_products_path}", myfile: File.new(file_format_validation, 'rb'), headers: headers )
 
-    RestClient.post("http://localhost:3000#{api_v1_products_path}", body.to_json, headers)
+    r = RestClient.post("http://localhost:3000#{api_v1_products_path}", body.to_json, headers)
+    raise
     redirect_to root_path
   end
 
@@ -47,8 +48,10 @@ class ProductsController < ApplicationController
   end
 
   def file_format_validation
-    uploaded_file = params[:file]
-    serialized_products = uploaded_file.tempfile.read
-    JSON.parse(serialized_products)
+    if params.key?(:file) && params[:file].content_type == "application/json"
+      uploaded_file = params[:file]
+      serialized_products = uploaded_file.tempfile.read
+      JSON.parse(serialized_products)
+    end
   end
 end

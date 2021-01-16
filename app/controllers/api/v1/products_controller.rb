@@ -56,29 +56,44 @@ class Api::V1::ProductsController < Api::V1::BaseController
 
   def create_products
     if params.key?('_json')
-      product_count = 0
-      product_params['_json'].each do |product_item|
-        product_item[:category] = product_item.delete :type
-        @product = Product.new(product_item)
-        authorize @product
-        if @product.save
-          product_count += 1
-        else
-          render_error
-          break
-        end
-      end
-      render json: { products_uploaded: product_params['_json'].length, products_saved: product_count }
+      create_multiple_products
     else
-      product_item = product_params
-      product_item[:category] = params['type']
+      create_single_product
+    end
+  end
+
+  def create_multiple_products
+    product_saved_count = []
+    product_unsaved_count = []
+    product_params['_json'].each do |product_item|
+      product_item[:category] = product_item.delete :type
       @product = Product.new(product_item)
       authorize @product
       if @product.save
-        render :show, status: :created
+        product_saved_count << product_item
       else
-        render_error
+        product_item[:errors] = @product.errors.full_messages
+        product_unsaved_count << product_item
       end
+    end
+    render json: {
+      products_uploaded: product_params['_json'].length,
+      products_saved: product_saved_count.length,
+      products_saved_count: product_saved_count,
+      products_unsaved: product_unsaved_count.length,
+      products_unsaved_count: product_unsaved_count
+    }
+  end
+
+  def create_single_product
+    product_item = product_params
+    product_item[:category] = params['type']
+    @product = Product.new(product_item)
+    authorize @product
+    if @product.save
+      render :show, status: :created
+    else
+      render_error
     end
   end
 end
