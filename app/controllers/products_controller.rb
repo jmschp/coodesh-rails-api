@@ -25,7 +25,9 @@ class ProductsController < ApplicationController
     if body.present?
       request = RestClient.post("http://localhost:3000#{api_v1_products_path}", body.to_json, headers)
       json_response = JSON.parse(request.body)
-      redirect_to root_path, notice: "Products uploaded: #{json_response['products_uploaded']} | Products saved: #{json_response['products_saved']}"
+
+      flash[:notice] = "Uploaded: #{json_response['products_uploaded']} | Saved: #{json_response['products_saved']}"
+      redirect_to root_path
     else
       redirect_to root_path, alert: "Invalid file"
     end
