@@ -7,11 +7,14 @@
     </p>
   </div>
   <div class="d-flex justify-content-center my-5">
-  <%= form_with url: '/upload_validation', multipart: true do |form| %>
-    <%= form.file_field :file, accept: 'application/json', required: true %>
-    <%= submit_tag 'Uplaod', class: "btn btn-primary"%>
-  <% end %>
+    <%= form_with url: upload_validation_path,local: false, multipart: true do |form| %>
+      <%= form.file_field :file, accept: 'application/json', required: true %>
+      <%= submit_tag 'Uplaod', class: "btn btn-primary"%>
+    <% end %>
   </div>
+  <h2>
+    <%= pluralize @products.size, "product" %>
+  </h2>
   <div class="product-table">
     <table class="table table-dark table-hover table-bordered">
       <thead>
@@ -46,6 +49,7 @@
                     "Delete",
                     product_path(product),
                     method: :delete,
+                    remote: true,
                     data: { confirm: "Are you sure?" }) %>
                 <% end %>
               </td>
