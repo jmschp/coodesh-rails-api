@@ -6,12 +6,14 @@
       Praesentium, illum itaque voluptatem molestias inventore sit repellat!
     </p>
   </div>
+  <% if user_signed_in? %>
   <div class="d-flex justify-content-center my-5">
     <%= form_with url: upload_validation_path,local: false, multipart: true do |form| %>
       <%= form.file_field :file, accept: 'application/json', required: true %>
       <%= submit_tag 'Uplaod', class: "btn btn-primary"%>
     <% end %>
   </div>
+  <% end %>
   <h2>
     <%= pluralize @products.size, "product" %>
   </h2>
