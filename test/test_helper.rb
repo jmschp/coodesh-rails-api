@@ -14,8 +14,8 @@ class ActiveSupport::TestCase
   include Warden::Test::Helpers
   Warden.test_mode!
   
-  include ActionDispatch::TestProcess
-  include Rails.application.routes.url_helpers
+  # include ActionDispatch::TestProcess
+  # include Rails.application.routes.url_helpers
 end
 
 Capybara.register_driver :headless_chrome do |app|
