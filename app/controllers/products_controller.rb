@@ -18,14 +18,14 @@ class ProductsController < ApplicationController
   def destroy
     # raise
     # @product.destroy
-    RestClient.delete("http://localhost:3000#{api_v1_products_path}/#{@product.id}", set_http_headers)
+    RestClient.delete("#{api_v1_products_url}/#{@product.id}", set_http_headers)
     redirect_to root_path, notice: "Product deleted"
   end
 
   def upload_validation
     body = file_format_validation
     if body.present?
-      request = RestClient.post("http://localhost:3000#{api_v1_products_path}", body.to_json, set_http_headers({ content_type: :json, accept: :json }))
+      request = RestClient.post(api_v1_products_url, body.to_json, set_http_headers({ content_type: :json, accept: :json }))
 
       json_response = JSON.parse(request.body)
 
