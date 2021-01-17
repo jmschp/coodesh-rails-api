@@ -38,6 +38,8 @@ gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
 
+gem 'cloudinary', '~> 1.2.2'
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
