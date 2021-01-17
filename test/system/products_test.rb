@@ -13,14 +13,17 @@ class ProductsTest < ApplicationSystemTestCase
   end
 
   test "upload file" do
-    visit root_path
-    json_file = fixture_file_upload('products-test.json','application/json')
-    post upload_validation_path,
-      params: {file: json_file }
-      headers: {}
+    # visit root_path
+    # click_on "Choose File"
+    #  login_as users(:george)
 
-    post '/api/endpoint',
-     params: { file: file },
-     headers: { 'content-type': 'multipart/form-data' }
+    file_path = "#{Rails.root}/test/fixtures/files/products-test.json"
+    json_file = fixture_file_upload("#{Rails.root}/test/fixtures/files/products-test.json",'application/json')
+    post upload_validation_url,
+      params: { file: json_file },
+      headers: {
+      content_type: "application/json"
+    }
+    assert_response 201
   end
 end
