@@ -28,8 +28,4 @@ class ProductPolicy < ApplicationPolicy
   def destroy?
     true
   end
-
-  # def api_status?
-  #   true
-  # end
 end
