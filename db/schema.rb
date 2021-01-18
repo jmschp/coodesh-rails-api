@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2021_01_17_225420) do
     t.integer "width"
     t.decimal "price", precision: 10, scale: 2, default: "0.0", null: false
     t.integer "rating", default: 0, null: false
+    t.string "image_url", default: "no image attached", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
