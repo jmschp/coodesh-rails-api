@@ -38,7 +38,7 @@ gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
 
-gem 'cloudinary', '~> 1.2'
+gem 'cloudinary', '~> 1.18.1'
 
 group :development, :test do
   gem 'pry-byebug'
