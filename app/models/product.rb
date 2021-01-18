@@ -9,13 +9,4 @@ class Product < ApplicationRecord
   validates :description, length: { maximum: 500 }
   validates :price, presence: true
   validates :rating, presence: true, inclusion: { in: PRODUCT_RATING }
-
-  # after_commit :update_photo_url
-
-  def update_photo_url
-    if self.photo.attached?
-      image_url = self.photo.url
-      self.update(image_url: image_url)
-    end
-  end
 end
