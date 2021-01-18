@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_17_225420) do
+ActiveRecord::Schema.define(version: 2021_01_18_150307) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -49,9 +49,9 @@ ActiveRecord::Schema.define(version: 2021_01_17_225420) do
     t.integer "width"
     t.decimal "price", precision: 10, scale: 2, default: "0.0", null: false
     t.integer "rating", default: 0, null: false
-    t.string "image_url", default: "no image attached", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image_url"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
