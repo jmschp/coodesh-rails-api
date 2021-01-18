@@ -1,5 +1,5 @@
 class Api::V1::ProductsController < Api::V1::BaseController
-  acts_as_token_authentication_handler_for User
+  acts_as_token_authentication_handler_for User #, except: [:api_status]
   before_action :set_product, only: %i[show update destroy]
 
   def index
