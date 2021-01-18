@@ -2,10 +2,6 @@ require "test_helper"
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   test "upload file" do
-    # visit root_path
-    # click_on "Choose File"
-    #  login_as users(:george)
-
     file_path = "#{Rails.root}/test/fixtures/files/products-test.json"
     json_file = fixture_file_upload("#{Rails.root}/test/fixtures/files/products-test.json",'application/json')
     post upload_validation_url,
@@ -14,5 +10,6 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
       content_type: "application/json"
     }
     assert_response 201
+    assert_equal root_path, page.current_path
   end
 end
