@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_01_17_225420) do
     t.string "title", null: false
     t.string "category", null: false
     t.text "description"
-    t.string "file_name"
+    t.string "filename"
     t.integer "height"
     t.integer "width"
     t.decimal "price", precision: 10, scale: 2, default: "0.0", null: false
