@@ -19,6 +19,9 @@ products.each do |product|
     title: product['title'],
     category: product['type'],
     description: product['description'],
+    filename: product['filename'],
+    height: product['height'],
+    width: product['width'],
     price: product['price'],
     rating: product['rating']
   )

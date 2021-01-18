@@ -1,5 +1,11 @@
 class ProductsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index]
   before_action :set_product, only: %i[edit update destroy]
+
+  def index
+    @products = policy_scope(Product)
+    authorize @products
+  end
 
   def edit
   end
@@ -10,29 +16,24 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product.destroy
-    redirect_to root_path
+    # raise
+    # @product.destroy
+    RestClient.delete("#{api_v1_products_url}/#{@product.id}", set_http_headers)
+    redirect_to root_path, notice: "Product deleted"
   end
 
   def upload_validation
-    # headers = {
-    #   'Content-type': 'application/json',
-    #   'X-User-Email': current_user.email,
-    #   'X-User-Token': current_user.reload.authentication_token
-    # }
-    headers = {
-      content_type: :json,
-      accept: :json,
-      x_user_email: current_user.email,
-      x_user_token: current_user.reload.authentication_token
-    }
     body = file_format_validation
-    # raise
-    # redirect_to(api_v1_products_path, method: :post, headers: headers, body: body)
-    # RestClient.post("http://localhost:3000#{api_v1_products_path}", myfile: File.new(file_format_validation, 'rb'), headers: headers )
+    if body.present?
+      request = RestClient.post(api_v1_products_url, body.to_json, set_http_headers({ content_type: :json, accept: :json }))
 
-    RestClient.post("http://localhost:3000#{api_v1_products_path}", body.to_json, headers)
-    redirect_to root_path
+      json_response = JSON.parse(request.body)
+
+      flash[:notice] = "Uploaded: #{json_response['products_uploaded']} | Saved: #{json_response['products_saved']}"
+      redirect_to root_path
+    else
+      redirect_to root_path, alert: "Invalid file"
+    end
   end
 
   private
@@ -43,12 +44,26 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:title, :category, :price, :rating)
+    params.require(:product).permit(:title, :category, :price, :rating, :image)
   end
 
   def file_format_validation
-    uploaded_file = params[:file]
-    serialized_products = uploaded_file.tempfile.read
-    JSON.parse(serialized_products)
+    if params.key?(:file) && params[:file].content_type == "application/json"
+      uploaded_file = params[:file]
+      serialized_products = uploaded_file.tempfile.read
+      JSON.parse(serialized_products)
+    end
+  end
+
+  def set_http_headers(args = {})
+    headers = {
+      x_user_email: current_user.email,
+      x_user_token: current_user.reload.authentication_token
+    }
+    if args.empty?
+      headers
+    else
+      headers.merge(args)
+    end
   end
 end
