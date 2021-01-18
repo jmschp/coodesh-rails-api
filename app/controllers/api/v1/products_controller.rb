@@ -1,5 +1,5 @@
 class Api::V1::ProductsController < Api::V1::BaseController
-  acts_as_token_authentication_handler_for User #, except: [:api_status]
+  acts_as_token_authentication_handler_for User # , except: [:api_status]
   before_action :set_product, only: %i[show update destroy]
 
   def index
@@ -11,7 +11,11 @@ class Api::V1::ProductsController < Api::V1::BaseController
   end
 
   def create
-    create_products
+    if params.key?('_json')
+      create_multiple_products
+    else
+      create_single_product
+    end
   end
 
   def update
@@ -32,7 +36,6 @@ class Api::V1::ProductsController < Api::V1::BaseController
     status = response.code
     message = "Ruby on Rails Challenge 20200810"
     @api_status = { status: status, message: message }
-    # authorize @api_status
   end
 
   private
@@ -52,14 +55,6 @@ class Api::V1::ProductsController < Api::V1::BaseController
 
   def render_error
     render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
-  end
-
-  def create_products
-    if params.key?('_json')
-      create_multiple_products
-    else
-      create_single_product
-    end
   end
 
   def create_multiple_products
