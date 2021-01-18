@@ -57,6 +57,7 @@ class Api::V1::ProductsController < Api::V1::BaseController
     render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
   end
 
+
   def create_multiple_products
     product_saved_count = []
     product_unsaved_count = []
@@ -77,7 +78,7 @@ class Api::V1::ProductsController < Api::V1::BaseController
       products_saved_count: product_saved_count,
       products_unsaved: product_unsaved_count.length,
       products_unsaved_count: product_unsaved_count
-    }, status: :created
+    }
   end
 
   def create_single_product
