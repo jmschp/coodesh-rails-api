@@ -44,7 +44,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:title, :category, :price, :rating)
+    params.require(:product).permit(:title, :category, :price, :rating, :photo)
   end
 
   def file_format_validation
