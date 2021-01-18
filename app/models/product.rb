@@ -10,7 +10,7 @@ class Product < ApplicationRecord
   validates :price, presence: true
   validates :rating, presence: true, inclusion: { in: PRODUCT_RATING }
 
-  after_save :update_image_url, only: :update
+  after_commit :update_image_url, only: :update
 
   private
 
