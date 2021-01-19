@@ -6,4 +6,23 @@
       Praesentium, illum itaque voluptatem molestias inventore sit repellat!
     </p>
   </div>
+  <% if user_signed_in? %>
+    <div class="product-table">
+      <table class="table table-dark table-hover table-bordered">
+        <thead>
+          <tr class="table-active">
+            <th scope="col">Title</th>
+            <th scope="col">Type</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Price</th>
+            <th scope="col">Created</th>
+            <th scope="col"> Action</th>
+          </tr>
+        </thead>
+        <tbody class="products-table-body">
+        
+        </tbody>
+      </table>
+    </div>
+  <% end %>
 </div>
