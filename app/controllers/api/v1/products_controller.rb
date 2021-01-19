@@ -36,6 +36,7 @@ class Api::V1::ProductsController < Api::V1::BaseController
     status = response.code
     message = "Ruby on Rails Challenge 20200810"
     @api_status = { status: status, message: message }
+    authorize Product
   end
 
   private
