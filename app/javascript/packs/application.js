@@ -23,7 +23,6 @@ import "bootstrap";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import { fetchProductsApi } from "./fetch_products_api";
-import { fetchWithAuth } from "../utils/fetch_with_auth";
 
 document.addEventListener("turbolinks:load", () => {
   // Call your functions here, e.g:
