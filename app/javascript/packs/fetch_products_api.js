@@ -1,9 +1,10 @@
 import { fetchWithAuth } from "../utils/fetch_with_auth";
 
-function fetchProductsApi(url, options) {
-  fetchWithAuth(url, options)
+function fetchProductsApi(url) {
+  fetch(url)
     .then((response) => response.json())
     .then((data) => {
+      console.log(data)
       const productTableBody = document.querySelector(".products-table-body");
       if (productTableBody) {
         data.forEach((product) => {
