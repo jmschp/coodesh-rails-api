@@ -3,15 +3,14 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
-import * as ActiveStorage from "@rails/activestorage"
-import "channels"
+import Rails from "@rails/ujs";
+import Turbolinks from "turbolinks";
+import * as ActiveStorage from "@rails/activestorage";
+import "channels";
 
-Rails.start()
-Turbolinks.start()
-ActiveStorage.start()
-
+Rails.start();
+Turbolinks.start();
+ActiveStorage.start();
 
 // ----------------------------------------------------
 // Note(lewagon): ABOVE IS RAILS DEFAULT CONFIGURATION
@@ -26,10 +25,9 @@ import "bootstrap";
 import { fetchProductsApi } from "./fetch_products_api";
 import { fetchWithAuth } from "../utils/fetch_with_auth";
 
-
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener("turbolinks:load", () => {
   // Call your functions here, e.g:
   // initSelect2();
-  fetchProductsApi('/api/v1/products', {headers: {'Content-type': 'application/json', 'Accept': 'application/json'}})
-  fetchWithAuth;("/api/v1/products");
+  fetchProductsApi("/api/v1/products");
+  fetchWithAuth("/api/v1/products");
 });
