@@ -4,7 +4,6 @@ function fetchProductsApi(url) {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data)
       const productTableBody = document.querySelector(".products-table-body");
       if (productTableBody) {
         data.forEach((product) => {
