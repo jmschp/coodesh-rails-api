@@ -5,9 +5,11 @@ function fetchProductsApi(url, options) {
     .then((response) => response.json())
     .then((data) => {
       const productTableBody = document.querySelector(".products-table-body");
-      data.forEach((product) => {
-        insertProductRows(productTableBody, product);
-      });
+      if (productTableBody) {
+        data.forEach((product) => {
+          insertProductRows(productTableBody, product);
+        });
+      }
     });
 }
 
