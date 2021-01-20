@@ -23,9 +23,11 @@ import "bootstrap";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import { fetchProductsApi } from "./fetch_products_api";
+import { postProductsForm } from "./post_products_form";
 
 document.addEventListener("turbolinks:load", () => {
   // Call your functions here, e.g:
   // initSelect2();
   fetchProductsApi("/api/v1/products");
+  postProductsForm();
 });

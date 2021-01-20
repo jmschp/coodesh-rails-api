@@ -11,6 +11,7 @@ class Api::V1::ProductsController < Api::V1::BaseController
   end
 
   def create
+    # binding.pry
     if params.key?('_json')
       create_multiple_products
     else
@@ -50,7 +51,7 @@ class Api::V1::ProductsController < Api::V1::BaseController
     if params.key?('_json')
       params.permit(_json: %i[title type description filename height width price rating])
     else
-      params.require(:product).permit(:title, :type, :description, :filename, :height, :width, :price, :rating)
+      params.require(:product).permit(:title, :type, :description, :filename, :height, :width, :price, :rating, :json)
     end
   end
 
