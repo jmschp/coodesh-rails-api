@@ -24,10 +24,12 @@ import "bootstrap";
 // import { initSelect2 } from '../components/init_select2';
 import { fetchProductsApi } from "./fetch_products_api";
 import { postProductsForm } from "./post_products_form";
+import { deleteApi } from "./fetch_delete_api";
 
 document.addEventListener("turbolinks:load", () => {
   // Call your functions here, e.g:
   // initSelect2();
-  fetchProductsApi("/api/v1/products");
+  fetchProductsApi("/api/v1/products", deleteApi);
+  // deleteApi();
   postProductsForm();
 });
