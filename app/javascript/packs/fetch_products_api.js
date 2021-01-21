@@ -23,7 +23,10 @@ function insertProductRows(productTableBody, product) {
     <td>${product.rating}</td>
     <td>${price}</td>
     <td>${dateCreated}</td>
-    <td><a><i class="far fa-edit"></i></a>  /  <a class="product-del"data-product-id=${product.id}><i class="far fa-trash-alt"></i></a></td>
+    <td>
+    <a class="product-edit" data-product-id=${product.id}><i class="far fa-edit"></i></a>
+    /
+    <a class="product-del" data-product-id=${product.id}><i class="far fa-trash-alt"></i></a></td>
     </tr>`
   );
 }
