@@ -1,5 +1,6 @@
 import { fetchProductsApi } from "./fetch_products_api";
 import { alertModal } from "../components/alert_modal";
+import { deleteApi } from "./fetch_delete_api";
 
 function postProductsForm() {
   const uploadFileForm = document.getElementById("upload-file-form");
@@ -19,7 +20,7 @@ function postProductsForm() {
           <p>Total products saved: ${data.products_saved_count}</p>
           <p>Total products unsaved: ${data.products_unsaved_count}</p>`
         );
-        fetchProductsApi("/api/v1/products");
+        fetchProductsApi("/api/v1/products", deleteApi);
         uploadFileForm.reset();
       });
   });
