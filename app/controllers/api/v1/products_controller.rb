@@ -60,25 +60,25 @@ class Api::V1::ProductsController < Api::V1::BaseController
   end
 
   def create_multiple_products
-    product_saved_count = []
-    product_unsaved_count = []
+    product_saved = []
+    product_unsaved = []
     product_params['_json'].each do |product_item|
       product_item[:category] = product_item.delete :type
       @product = Product.new(product_item)
       authorize @product
       if @product.save
-        product_saved_count << product_item
+        product_saved << product_item
       else
         product_item[:errors] = @product.errors.full_messages
-        product_unsaved_count << product_item
+        product_unsaved << product_item
       end
     end
     render json: {
-      products_uploaded: product_params['_json'].length,
-      products_saved: product_saved_count.length,
-      products_saved_count: product_saved_count,
-      products_unsaved: product_unsaved_count.length,
-      products_unsaved_count: product_unsaved_count
+      products_uploaded_count: product_params['_json'].length,
+      products_saved_count: product_saved.length,
+      products_saved: product_saved,
+      products_unsaved_count: product_unsaved.length,
+      products_unsaved: product_unsaved
     }
   end
 

@@ -7,12 +7,16 @@
     </p>
   </div>
   <% if user_signed_in? %>
+    <!-- Upload file form -->
     <div class="d-flex justify-content-center my-5">
-       <form id="upload-file-form" accept-charset="UTF-8">
+      <form id="upload-file-form" accept-charset="UTF-8">
         <input type="file" name="file" id="file" accept="application/json" required="required">
         <button name="button" type="submit">Uplodad file</button>
       </form>
     </div>
+    <!-- Modal -->
+    <%= render("upload-file-modal") %>
+    <!-- Table -->
     <div class="product-table">
       <table class="table table-dark table-hover table-bordered">
         <thead>

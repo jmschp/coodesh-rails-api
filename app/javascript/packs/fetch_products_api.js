@@ -1,5 +1,3 @@
-import { fetchWithAuth } from "../utils/fetch_with_auth";
-
 function fetchProductsApi(url) {
   fetch(url)
     .then((response) => response.json())
