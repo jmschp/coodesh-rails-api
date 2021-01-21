@@ -1,6 +1,6 @@
 import { fetchProductsApi } from "./fetch_products_api";
 import { alertModal } from "../components/alert_modal";
-import { deleteApi } from "./fetch_delete_api";
+import { deleteApi } from "./fetch_delete_product";
 
 function postProductsForm() {
   const uploadFileForm = document.getElementById("upload-file-form");
