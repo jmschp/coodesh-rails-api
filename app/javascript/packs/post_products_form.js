@@ -1,13 +1,9 @@
-// import { Modal } from "bootstrap";
 import { fetchProductsApi } from "./fetch_products_api";
 import { alertModal } from "../components/alert_modal";
 
 function postProductsForm() {
   const uploadFileForm = document.getElementById("upload-file-form");
   const fileInputField = document.getElementById("file");
-  // const productsUploadModal = document.getElementById("product-upload-modal");
-  // const productsUploadModalBody = document.getElementById("product-upload-modal-body");
-  // const productsModal = new Modal(productsUploadModal);
 
   uploadFileForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -26,7 +22,6 @@ function postProductsForm() {
         fetchProductsApi("/api/v1/products");
         uploadFileForm.reset();
       });
-    // productsUploadModalBody.innerHTML = "";
   });
 }
 
