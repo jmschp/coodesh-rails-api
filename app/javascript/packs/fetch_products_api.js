@@ -12,13 +12,8 @@ function fetchProductsApi(url) {
 }
 
 function insertProductRows(productTableBody, product) {
-  const price = parseFloat(product.price).toLocaleString("pt-BR", {
-    currency: "BRL",
-    style: "currency",
-  });
-  const dateCreated = new Date(product.created_at).toLocaleString("pt-BR", {
-    dateStyle: "short",
-  });
+  const price = parseFloat(product.price).toLocaleString("pt-BR", { currency: "BRL", style: "currency" });
+  const dateCreated = new Date(product.created_at).toLocaleString("pt-BR", { dateStyle: "short" });
   productTableBody.insertAdjacentHTML(
     "beforeend",
     `<th scope="row">${product.title}</th>
