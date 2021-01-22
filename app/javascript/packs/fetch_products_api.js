@@ -1,4 +1,4 @@
-function fetchProductsApi(url, callback) {
+function fetchProductsApi(url, ...callbacks) {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
@@ -7,7 +7,7 @@ function fetchProductsApi(url, callback) {
         data.forEach((product) => {
           insertProductRows(productTableBody, product);
         });
-        callback();
+        callbacks.forEach(callback => callback());
       }
     });
 }
@@ -24,7 +24,7 @@ function insertProductRows(productTableBody, product) {
     <td>${price}</td>
     <td>${dateCreated}</td>
     <td>
-    <a class="product-edit" data-product-id=${product.id}><i class="far fa-edit"></i></a>
+    <i class="far fa-edit product-edit" data-product-id=${product.id}"></i>
     /
     <a class="product-del" data-product-id=${product.id}><i class="far fa-trash-alt"></i></a></td>
     </tr>`

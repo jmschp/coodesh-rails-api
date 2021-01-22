@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # post "/api/v1/upload_validation", to: "api/v1/products#upload_validation"
 
   
-  # resources :products, only: [:edit, :update, :destroy]
+  resources :products, only: [:edit, :update, :destroy]
   
   # post "upload_validation", to: "products#upload_validation"
 end
