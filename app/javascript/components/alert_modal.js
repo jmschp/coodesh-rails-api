@@ -1,12 +1,16 @@
-import { Modal } from "bootstrap";
+// import { Modal } from "bootstrap";
 
-function alertModal(whereToInsertHtml, htmlToInsert) {
-  const productsUploadModal = document.getElementById("product-upload-modal");
-  const productsUploadModalBody = document.getElementById("product-upload-modal-body");
+function alertModal(titleText, bodyHtml) {
+  // const productsUploadModal = document.getElementById("product-modal");
+  const productsUploadModalTitle = document.getElementById("product-modal-title");
+  const productsUploadModalBody = document.getElementById("product-modal-body");
+  productsUploadModalTitle.textContent = "";
   productsUploadModalBody.innerHTML = "";
-  const productsModal = new Modal(productsUploadModal);
-  productsUploadModalBody.insertAdjacentHTML(whereToInsertHtml, htmlToInsert);
-  productsModal.show();
+  // const productsModal = new Modal(productsUploadModal);
+  productsUploadModalTitle.textContent = titleText;
+  productsUploadModalBody.innerHTML = bodyHtml;
+  // productsModal.show();
+  $("#product-modal").modal("show");
 }
 
 export { alertModal };
