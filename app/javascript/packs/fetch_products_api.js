@@ -24,7 +24,7 @@ function insertProductRows(productTableBody, product) {
     <td>${price}</td>
     <td>${dateCreated}</td>
     <td>
-    <i class="far fa-edit product-edit" data-product-id=${product.id}"></i>
+    <i class="far fa-edit product-edit" data-product-id=${product.id}></i>
     /
     <a class="product-del" data-product-id=${product.id}><i class="far fa-trash-alt"></i></a></td>
     </tr>`

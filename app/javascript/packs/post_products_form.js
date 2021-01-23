@@ -15,7 +15,7 @@ function postProductsForm() {
       .then((response) => response.json())
       .then((data) => {
         alertModal(
-          "beforeend",
+          "Product uploaded",
           `<p>Total products uploaded: ${data.products_uploaded_count}</p>
           <p>Total products saved: ${data.products_saved_count}</p>
           <p>Total products unsaved: ${data.products_unsaved_count}</p>`

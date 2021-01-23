@@ -8,7 +8,7 @@ function deleteApi() {
       fetch(`/api/v1/products/${productId}`, { method: "DELETE" })
         .then((response) => response.json())
         .then((data) => {
-          alertModal("beforeend", `<p>${data.message}</p>`);
+          alertModal("Products deleted", `<p>${data.message}</p>`);
           setTimeout(() => {
             location.reload();
           }, 1500);
