@@ -20,7 +20,9 @@ class Api::V1::ProductsController < Api::V1::BaseController
   end
 
   def update
-    if @product.update(product_params)
+    product_item = product_params
+    product_item[:category] = params['type']
+    if @product.update(product_item)
       render :show
     else
       render_error
