@@ -12,9 +12,8 @@ Rails.application.routes.draw do
   
   get "/api/v1", to: "api/v1/products#api_status", defaults: { format: :json }
   # post "/api/v1/upload_validation", to: "api/v1/products#upload_validation"
-
   
-  resources :products, only: [:edit, :update, :destroy]
+  # resources :products, only: [:edit, :update, :destroy]
   
   # post "upload_validation", to: "products#upload_validation"
 end
