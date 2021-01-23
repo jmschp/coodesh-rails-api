@@ -21,7 +21,7 @@ class Api::V1::ProductsController < Api::V1::BaseController
 
   def update
     product_item = product_params
-    product_item[:category] = params['type']
+    product_item[:category] = params['type'] if product_params.key?("")
     if @product.update(product_item)
       render :show
     else
@@ -53,7 +53,8 @@ class Api::V1::ProductsController < Api::V1::BaseController
     if params.key?('_json')
       params.permit(_json: %i[title type description filename height width price rating])
     else
-      params.require(:product).permit(:title, :type, :description, :filename, :height, :width, :price, :rating, :json)
+      # binding.pry
+      params.require(:product).permit(:title, :type, :description, :filename, :height, :width, :price, :rating, :json, :image)
     end
   end
 

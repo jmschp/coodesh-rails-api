@@ -7,7 +7,7 @@ function fetchProductsApi(url, ...callbacks) {
         data.forEach((product) => {
           insertProductRows(productTableBody, product);
         });
-        callbacks.forEach(callback => callback());
+        callbacks.forEach((callback) => callback());
       }
     });
 }
@@ -18,15 +18,18 @@ function insertProductRows(productTableBody, product) {
   productTableBody.insertAdjacentHTML(
     "beforeend",
     `<tr data-product-id=${product.id}>
-    <th scope="row">${product.title}</th>
-    <td>${product.category}</td>
-    <td>${product.rating}</td>
-    <td>${price}</td>
-    <td>${dateCreated}</td>
-    <td>
-    <i class="far fa-edit product-edit" data-product-id=${product.id}></i>
-    /
-    <a class="product-del" data-product-id=${product.id}><i class="far fa-trash-alt"></i></a></td>
+      <th scope="row">${product.title}</th>
+      <td>${product.category}</td>
+      <td>${product.rating}</td>
+      <td>${price}</td>
+      <td>${dateCreated}</td>
+      <td>
+        <i class="far fa-edit product-edit" data-product-id=${product.id}></i>
+        /
+        <i class="far fa-images product-image" data-product-id=${product.id}></i>
+        /
+        <i class="far fa-trash-alt product-del" data-product-id=${product.id}></i>
+      </td>
     </tr>`
   );
 }

@@ -26,9 +26,11 @@ import { fetchProductsApi } from "./fetch_products_api";
 import { postProductsForm } from "./post_products_form";
 import { deleteApi } from "./fetch_delete_product";
 import { editProduct } from "./fetch_edit_product";
+import { editProductImage } from "./fetch_uplaod_image";
+
 
 document.addEventListener("turbolinks:load", () => {
-  fetchProductsApi("/api/v1/products", deleteApi, editProduct);
+  fetchProductsApi("/api/v1/products", deleteApi, editProduct, editProductImage);
   // editProduct();
   postProductsForm();
 });

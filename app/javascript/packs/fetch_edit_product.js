@@ -73,8 +73,6 @@ function handleSubmit(productId, event) {
   const data = new FormData(event.target);
   const values = Object.fromEntries(data.entries());
   const body = JSON.stringify(values);
-  console.log(data);
-  console.log(productId);
   fetch(`/api/v1/products/${productId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
