@@ -11,14 +11,6 @@ function editProductImage() {
       imageForm.addEventListener("submit", (event) => {
         handleSubmit(productId, event);
       });
-      //   fetch(`api/v1/products/${productId}`)
-      //     .then((response) => response.json())
-      //     .then((data) => {
-      //       const updatedForm = document.getElementById("product-edit-form");
-      //       updatedForm.addEventListener("submit", (event) => {
-      //         handleSubmit(productId, event);
-      //       });
-      //     });
     });
   });
 }

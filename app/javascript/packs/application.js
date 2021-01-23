@@ -31,6 +31,5 @@ import { editProductImage } from "./fetch_upload_image";
 
 document.addEventListener("turbolinks:load", () => {
   fetchProductsApi("/api/v1/products", deleteApi, editProduct, editProductImage);
-  // editProduct();
   postProductsForm();
 });
